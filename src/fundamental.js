@@ -117,3 +117,4 @@ function reportStreet(street) {
 }
 reportParks(allParks);
 reportStreet(allStreets);
+// Spread and Rest Operator
