@@ -48,10 +48,36 @@ class Park extends Attribute {
     return result;
   }
 }
+class Street extends Attribute {
+  constructor(name, buildYear, length, size) {
+    super(name, buildYear);
+    this.length = length;
+    this.name = name;
+  }
+  streetClassify() {
+    var classification = new Map();
+    classification.set(1, 'tiny');
+    classification.set(2, 'small');
+    classification.set(3, 'normal');
+    classification.set(4, 'big');
+    classification.set(5, 'huge');
+    console.log(
+      `${this.name}, build in ${this.buildYear}, is a ${classification.get(
+        this.size
+      )} street.`
+    );
+  }
+}
 const allParks = [
   new Park('Green Park', 1987, 0.2, 215),
   new Park('National Park', 1894, 2.9, 41),
   new Park('Oak Park', 1953, 0.4, 949),
+];
+const allStreets = [
+  new Street('Ocean Avenue', 1999, 1.1, 4),
+  new Street('Evergreen Street', 2008, 2.7, 2),
+  new Street('4th Street', 2015, 0.8),
+  new Street('Sunset Boulevard', 1982, 2.5, 5),
 ];
 function reportParks(park) {
   console.log('-----PARK REPORT-----');
@@ -76,4 +102,18 @@ function reportParks(park) {
     });
   }
 }
+function reportStreet(street) {
+  console.log('-----STREET REPORT-----');
+  let amountOfLength = street
+    .map((current) => current.length)
+    .reduce((accmulator, current) => accmulator + current);
+  console.log(
+    `Our ${
+      street.length
+    } streets have a total length of ${amountOfLength} km, with an average of ${
+      amountOfLength / street.length
+    } km.`
+  );
+}
 reportParks(allParks);
+reportStreet(allStreets);
