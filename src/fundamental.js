@@ -118,3 +118,9 @@ function reportStreet(street) {
 reportParks(allParks);
 reportStreet(allStreets);
 // Spread and Rest Operator
+const arr1 = [1, 2, 3, 4, 5];
+const arr2 = [...arr1, 2, 3, 4, 5];
+console.log(arr2.length);
+//Destructuring
+const [, , a] = arr1;
+console.log(a);
