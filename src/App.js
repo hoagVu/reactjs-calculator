@@ -10,13 +10,13 @@ const App = (props) => {
     ],
     otherState: 'some other value',
   });
-  const switchNameHandler = () => {
+  const switchNameHandler = (newName) => {
     // console.log('switchName Success!');
     //Do not mutate state directly. Use setState()
     // DO NOT DO THIS:  this.state.persons[0].name = 'Quynh';
     setPersonState({
       persons: [
-        { name: 'Hoang', age: '29' },
+        { name: newName, age: '29' },
         { name: 'Vu', age: '25' },
         { name: 'Viet', age: '25' },
       ],
@@ -26,7 +26,9 @@ const App = (props) => {
     <div className="App">
       <h1> Hello World!</h1>
       <p>This is really working!</p>
-      <button onClick={switchNameHandler}>Switch Name</button>
+      <button onClick={switchNameHandler.bind(this, 'Hoang Vu')}>
+        Switch Name
+      </button>
       <Person
         name={personState.persons[0].name}
         age={personState.persons[0].age}
@@ -34,6 +36,7 @@ const App = (props) => {
       <Person
         name={personState.persons[1].name}
         age={personState.persons[1].age}
+        click={switchNameHandler.bind(this, 'Hoang Viet')}
       >
         My Hobbies: Coding
       </Person>
