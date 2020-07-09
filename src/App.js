@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './components/Person/Person.js';
-const App = (props) => {
-  const [personState, setPersonState] = useState({
+class App extends Component {
+  state = {
     persons: [
       { name: 'Hoang', age: '29' },
       { name: 'Vu', age: '25' },
       { name: 'Viet', age: '24' },
     ],
     otherState: 'some other value',
-  });
-  const switchNameHandler = (newName) => {
+    showPersons: false,
+  };
+  switchNameHandler = (newName) => {
     // console.log('switchName Success!');
     //Do not mutate state directly. Use setState()
     // DO NOT DO THIS:  this.state.persons[0].name = 'Quynh';
-    setPersonState({
+    this.setState({
       persons: [
         { name: newName, age: '29' },
         { name: 'Vu', age: '25' },
@@ -22,31 +23,51 @@ const App = (props) => {
       ],
     });
   };
-  return (
-    <div className="App">
-      <h1> Hello World!</h1>
-      <p>This is really working!</p>
-      <button onClick={switchNameHandler.bind(this, 'Hoang Vu')}>
-        Switch Name
-      </button>
-      <Person
-        name={personState.persons[0].name}
-        age={personState.persons[0].age}
-      ></Person>
-      <Person
-        name={personState.persons[1].name}
-        age={personState.persons[1].age}
-        click={switchNameHandler.bind(this, 'Hoang Viet')}
-      >
-        My Hobbies: Coding
-      </Person>
-      <Person
-        name={personState.persons[2].name}
-        age={personState.persons[2].age}
-      ></Person>
-    </div>
-  );
-};
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doesShow,
+    });
+  };
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        { name: 'Hoang', age: '29' },
+        { name: event.target.value, age: '25' },
+        { name: 'Viet', age: '24' },
+      ],
+    });
+  };
+  render() {
+    return (
+      <div className="App">
+        <h1> Hello World!</h1>
+        <p>This is really working!</p>
+        <button onClick={this.togglePersonHandler}>Switch Name</button>
+        {this.state.showPersons === true ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            ></Person>
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'Hoang Viet')}
+              change={this.nameChangedHandler}
+            >
+              My Hobbies: Coding
+            </Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            ></Person>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+}
 
 export default App;
 // state = {
