@@ -1,5 +1,9 @@
 import React from 'react';
-const person = () => {
-  return <p>This was imported from a functional components!</p>;
+const person = (props) => {
+  return (
+    <p>
+      Name: {props.name} and age: {props.age}
+    </p>
+  );
 };
 export default person;

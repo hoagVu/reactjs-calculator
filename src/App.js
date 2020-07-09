@@ -6,7 +6,9 @@ function App() {
     <div className="App">
       <h1> Hello World!</h1>
       <p>This is really working!</p>
-      <Person></Person>
+      <Person name="Hoang" age="28"></Person>
+      <Person name="Vu" age="29"></Person>
+      <Person name="Viet" age="20"></Person>
     </div>
   );
 }
