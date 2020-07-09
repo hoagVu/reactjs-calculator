@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Person from './components/Person/Person.js';
-class App extends Component {
-  state = {
+const App = (props) => {
+  const [personState, setPersonState] = useState({
     persons: [
       { name: 'Hoang', age: '29' },
       { name: 'Vu', age: '25' },
       { name: 'Viet', age: '24' },
     ],
-  };
-  switchNameHandler = () => {
+    otherState: 'some other value',
+  });
+  const switchNameHandler = () => {
     // console.log('switchName Success!');
     //Do not mutate state directly. Use setState()
     // DO NOT DO THIS:  this.state.persons[0].name = 'Quynh';
-    this.setState({
+    setPersonState({
       persons: [
         { name: 'Hoang', age: '29' },
         { name: 'Vu', age: '25' },
@@ -21,29 +22,46 @@ class App extends Component {
       ],
     });
   };
-  render() {
-    return (
-      <div className="App">
-        <h1> Hello World!</h1>
-        <p>This is really working!</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        ></Person>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-        >
-          My Hobbies: Coding
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        ></Person>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <h1> Hello World!</h1>
+      <p>This is really working!</p>
+      <button onClick={switchNameHandler}>Switch Name</button>
+      <Person
+        name={personState.persons[0].name}
+        age={personState.persons[0].age}
+      ></Person>
+      <Person
+        name={personState.persons[1].name}
+        age={personState.persons[1].age}
+      >
+        My Hobbies: Coding
+      </Person>
+      <Person
+        name={personState.persons[2].name}
+        age={personState.persons[2].age}
+      ></Person>
+    </div>
+  );
+};
 
 export default App;
+// state = {
+//   persons: [
+//     { name: 'Hoang', age: '29' },
+//     { name: 'Vu', age: '25' },
+//     { name: 'Viet', age: '24' },
+//   ],
+// };
+// switchNameHandler = () => {
+//   // console.log('switchName Success!');
+//   //Do not mutate state directly. Use setState()
+//   // DO NOT DO THIS:  this.state.persons[0].name = 'Quynh';
+//   this.setState({
+//     persons: [
+//       { name: 'Hoang', age: '29' },
+//       { name: 'Vu', age: '25' },
+//       { name: 'Viet', age: '25' },
+//     ],
+//   });
+// };
