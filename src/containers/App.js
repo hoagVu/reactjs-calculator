@@ -8,7 +8,6 @@ class App extends Component {
     this.state = {
       input: '',
       previousNumber: '',
-      currentNumber: '',
       operator: '',
     };
   }
@@ -33,6 +32,72 @@ class App extends Component {
   clearInput = () => {
     this.setState({ input: '' });
   };
+  // TODO:Handle Operations
+  // addition, subtraction, multiple, division, percent
+  negativeNumber = () => {
+    if (this.state.input !== '' && parseFloat(this.state.input) > 0) {
+      this.setState({
+        input: `${parseFloat(this.state.input) * -1}`,
+      });
+    } else if (this.state.input !== '' && parseFloat(this.state.input) < 0) {
+      this.setState({
+        input: `${parseFloat(this.state.input) * -1}`,
+      });
+    }
+  };
+  percent = () => {
+    if (this.state.input !== '') {
+      this.setState({ input: `${parseFloat(this.state.input) / 100}` });
+    }
+  };
+  add = () => {
+    this.setState({ previousNumber: this.state.input });
+    this.setState({ input: '' });
+    this.setState({ operator: 'plus' });
+  };
+  sub = () => {
+    this.setState({ previousNumber: this.state.input });
+    this.setState({ input: '' });
+    this.setState({ operator: 'minus' });
+  };
+  mul = () => {
+    this.setState({ previousNumber: this.state.input });
+    this.setState({ input: '' });
+    this.setState({ operator: 'multiply' });
+  };
+  division = () => {
+    this.setState({ previousNumber: this.state.input });
+    this.setState({ input: '' });
+    this.setState({ operator: 'division' });
+  };
+  displayResult = () => {
+    if (this.state.operator === 'plus') {
+      const result =
+        parseFloat(this.state.previousNumber) + parseFloat(this.state.input);
+
+      this.setState({
+        input: result,
+      });
+    } else if (this.state.operator === 'minus') {
+      const result =
+        parseFloat(this.state.previousNumber) - parseFloat(this.state.input);
+      this.setState({
+        input: result,
+      });
+    } else if (this.state.operator === 'multiply') {
+      const result =
+        parseFloat(this.state.previousNumber) * parseFloat(this.state.input);
+      this.setState({
+        input: result,
+      });
+    } else if (this.state.operator === 'division') {
+      const result =
+        parseFloat(this.state.previousNumber) / parseFloat(this.state.input);
+      this.setState({
+        input: result,
+      });
+    }
+  };
   render() {
     return (
       <div className="App">
@@ -42,33 +107,33 @@ class App extends Component {
           </div>
           <div className="row">
             <Button clicked={this.clearInput}>AC</Button>
-            <Button>-Var</Button>
-            <Button>%</Button>
-            <Button>/</Button>
+            <Button clicked={this.negativeNumber}>-Var</Button>
+            <Button clicked={this.percent}>%</Button>
+            <Button clicked={this.division}>/</Button>
           </div>
           <div className="row">
             <Button clicked={this.addNumberToInput}>7</Button>
             <Button clicked={this.addNumberToInput}>8</Button>
             <Button clicked={this.addNumberToInput}>9</Button>
-            <Button>*</Button>
+            <Button clicked={this.mul}>*</Button>
           </div>
           <div className="row">
             <Button clicked={this.addNumberToInput}>4</Button>
             <Button clicked={this.addNumberToInput}>5</Button>
             <Button clicked={this.addNumberToInput}>6</Button>
-            <Button>-</Button>
+            <Button clicked={this.sub}>-</Button>
           </div>
           <div className="row">
             <Button clicked={this.addNumberToInput}>1</Button>
             <Button clicked={this.addNumberToInput}>2</Button>
             <Button clicked={this.addNumberToInput}>3</Button>
-            <Button>+</Button>
+            <Button clicked={this.add}>+</Button>
           </div>
           <div className="row">
-            <Button></Button>
+            <Button> </Button>
             <Button clicked={this.addZero}>0</Button>
             <Button clicked={this.addDecimal}>.</Button>
-            <Button>=</Button>
+            <Button clicked={this.displayResult}>=</Button>
           </div>
         </div>
       </div>
