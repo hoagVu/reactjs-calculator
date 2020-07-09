@@ -1,1 +1,17 @@
-.App {}
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1000px;
+  width: 100%;
+}
+
+.calc-main {
+  width: 500px;
+  height: 600px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+}
